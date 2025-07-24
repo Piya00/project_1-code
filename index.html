@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Service Page</title>
+  <link rel="stylesheet" href="style_s.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-hands-helping"></i>
+        <div class="logo-text">Help<span>Desk</span></div>
+    </div>
+    
+    <div class="nav-links">
+        <a href="demo.html"><i class="fas fa-home"></i> Home</a>
+        
+        <div class="dropdown">
+            <a href="index.html"><i class="fas fa-concierge-bell"></i> Services</a>
+            <div class="dropdown-content">
+                <a href="index.html"><i class="fas fa-wrench"></i> Plumbing</a>
+                <a href="index.html"><i class="fas fa-bolt"></i> Electrical</a>
+                <a href="index.html"><i class="fas fa-car"></i> Auto Repair</a>
+            </div>
+        </div>
+        
+        <a href="employeeverificationpage.html"><i class="fas fa-briefcase"></i> Employment</a>
+        <a href="proj.html"> <i class="fas fa-user"> Login</i></a>
+    </div>
+    
+    <div class="mobile-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+  <!-- Banner Section -->
+ 
+
+  <!-- Map Section (now at top) -->
+  <section class="map-section" style="text-align: center; padding: 40px 20px; background-color: var(--light);">
+    <h2><i class="fas fa-map-marker-alt"></i> Your Location</h2>
+    <iframe
+      id="mapFrame"
+      width="100%"
+      height="400"
+      style="border:0; border-radius: 12px; box-shadow: var(--shadow); max-width: 900px;"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=27.700744,85.320925&z=14&output=embed">
+    </iframe>
+    <br /><br />
+    <button id="locationBtn" class="cta-btn primary">
+      <i class="fas fa-location-arrow"></i> Show My Current Location
+    </button>
+    <p id="locationInfo" style="margin-top: 10px; font-weight: 500; color: var(--dark);"></p>
+  </section>
+
+  <!-- Services Section (now below map) -->
+  <section class="services">
+    <h2><i class="fas fa-toolbox"></i> Available Services</h2>
+
+    <div class="service-search">
+      <input type="text" id="serviceSearch" placeholder="Search services... 🔍" />
+    </div>
+
+    <div class="service-grid" id="serviceList">
+      <div class="service-card" data-name="Plumbing">
+        <div class="service-icon"><i class="fas fa-faucet-drip"></i></div>
+        <h3>Plumbing</h3>
+        <p>Fix leaks, install pipes, water systems, and more.</p>
+        <button class="cta-btn primary request-btn">Request Now</button>
+      </div>
+
+      <div class="service-card" data-name="Electrical">
+        <div class="service-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Electrical</h3>
+        <p>Wiring, lighting, appliance repair and emergency help.</p>
+        <button class="cta-btn primary request-btn">Request Now</button>
+      </div>
+
+      <div class="service-card" data-name="Mechanical">
+        <div class="service-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Mechanical</h3>
+        <p>AC servicing, machine repair and general maintenance.</p>
+        <button class="cta-btn primary request-btn">Request Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 HelpDesk Management System. All rights reserved.</p>
+</footer>
+
+  <!-- Script -->
+  <script>
+    // Show Location Button
+    document.getElementById('locationBtn').addEventListener('click', function () {
+      const info = document.getElementById('locationInfo');
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            info.textContent = `Latitude: ${latitude.toFixed(4)}, Longitude: ${longitude.toFixed(4)}`;
+
+            // Update map
+            const mapFrame = document.getElementById('mapFrame');
+            mapFrame.src = `https://www.google.com/maps?q=${latitude},${longitude}&z=14&output=embed`;
+          },
+          function (error) {
+            info.textContent = "Unable to get your location: " + error.message;
+          }
+        );
+      } else {
+        info.textContent = "Geolocation is not supported by your browser.";
+      }
+    });
+
+    // Search Services
+    const searchInput = document.getElementById('serviceSearch');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+      serviceCards.forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        card.style.display = name.includes(filter) ? 'block' : 'none';
+      });
+    });
+
+    // Request Now Popup
+    const requestButtons = document.querySelectorAll('.request-btn');
+    requestButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        alert("✅ Request received. Please wait while we assign a technician to your location.");
+      });
+    });
+  </script>
+</body>
+</html>

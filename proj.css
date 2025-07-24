@@ -1,0 +1,121 @@
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .home{
+      position: relative;
+      color: white;
+    }
+
+    .home:hover{
+      color:  rgba(4, 208, 157, 0.833);
+    }
+
+    body {
+      min-height: 100vh;
+      /* background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover; */
+      background-color: #2f4c69;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 40px;
+      width: 350px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border: none;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .input-box input::placeholder {
+      color: #eee;
+    }
+
+    .input-box i {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #fff;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .options input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .options a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .options a:hover {
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      background: #fff;
+      color: #333;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background: #f0f0f0;
+    }
+
+    .register-link {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .register-link a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+  
