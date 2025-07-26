@@ -13,25 +13,51 @@
         </div>
   <div class="login-box">
     <h2><a href="./demo.html"><i class="fas fa-home home"></i></a> Signup</h2>
-    <form>
+    <form id="signupForm">
       <div class="input-box">
-        <input type="text" placeholder="Username" required>
+        <input type="text" id="newUsername" placeholder="Username" required>
         <i class="fas fa-user"></i>
       </div>
       <div class="input-box">
-        <input type="email" placeholder="Email" required>
+        <input type="email" id="newEmail" placeholder="Email" required>
         <i class="fas fa-envelope"></i>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Password" required>
+        <input type="password" id="newPassword" placeholder="Password" required>
         <i class="fas fa-lock"></i>
       </div>
       <button type="submit" class="login-btn">Register</button>
       <div class="register-link">
         Already have an account? <a href="proj.html">Login</a>
       </div>
+      <div id="signup-success" style="color: lightgreen; margin-top: 10px; display: none;">
+        Registration successful! You can now login.
+      </div>
     </form>
   </div>
 
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('newUsername').value;
+      const email = document.getElementById('newEmail').value;
+      const password = document.getElementById('newPassword').value;
+      
+      // Store user data in localStorage
+      localStorage.setItem('helpdesk_username', username);
+      localStorage.setItem('helpdesk_password', password);
+      localStorage.setItem('helpdesk_email', email);
+      
+      // Show success message
+      const successMessage = document.getElementById('signup-success');
+      successMessage.style.display = 'block';
+      
+      // Optional: Redirect to login after a delay
+      setTimeout(() => {
+        window.location.href = 'proj.html';
+      }, 1500);
+    });
+  </script>
 </body>
 </html>

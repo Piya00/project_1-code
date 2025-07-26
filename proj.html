@@ -43,22 +43,27 @@
   </div>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent form from submitting normally
-      
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const errorMessage = document.getElementById('error-message');
-      
-      // Check credentials
-      if (username === 'helpdesk' && password === 'findhelp123') {
-        // Redirect to home page
-        window.location.href = './demo.html';
-      } else {
-        // Show error message
-        errorMessage.style.display = 'block';
-      }
-    });
+   document.getElementById('loginForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form from submitting normally
+  
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const errorMessage = document.getElementById('error-message');
+  
+  // Get stored credentials
+  const storedUsername = localStorage.getItem('helpdesk_username');
+  const storedPassword = localStorage.getItem('helpdesk_password');
+  
+  // Check credentials (either default or stored)
+  if ((username === 'helpdesk' && password === 'findhelp123') || 
+      (username === storedUsername && password === storedPassword)) {
+    // Redirect to home page
+    window.location.href = './demo.html';
+  } else {
+    // Show error message
+    errorMessage.style.display = 'block';
+  }
+});
   </script>
 </body>
 </html>
