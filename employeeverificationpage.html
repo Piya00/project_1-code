@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Employee Verification</title>
-  <link rel="stylesheet" href="verification.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Employee Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="verification.css">
 </head>
 <body>
- <nav class="navbar">
+    <nav class="navbar">
         <div class="logo">
             <i class="fas fa-hands-helping"></i>
             <div class="logo-text">Help<span>Desk</span></div>
@@ -19,78 +18,83 @@
             <a href="demo.html"><i class="fas fa-home"></i> Home</a>
             
             <div class="dropdown">
-                <a href="index.html"><i class="fas fa-concierge-bell"></i> Services</a>
+                <a href="service.html"><i class="fas fa-concierge-bell"></i> Services</a>
                 <div class="dropdown-content">
-                    <a href="index.html"><i class="fas fa-wrench"></i> Plumbing</a>
-                    <a href="index.html"><i class="fas fa-bolt"></i> Electrical</a>
-                    <a href="index.html"><i class="fas fa-car"></i> Auto Repair</a>
-                    
+                    <a href="service.html"><i class="fas fa-wrench"></i> Plumbing</a>
+                    <a href="service.html"><i class="fas fa-bolt"></i> Electrical</a>
+                    <a href="service.html"><i class="fas fa-car"></i> Auto Repair</a>
                 </div>
             </div>
             
             <a href="employeeverificationpage.html"><i class="fas fa-briefcase"></i> Employment</a>
-            <!-- <a href="proj.html"><i class="fas fa-user"></i> Login</a> -->
-            <a href="proj.html"> <i class="cta-button"><i class="fas fa-user">  Login</i></i></a>
+            <a href="proj.html"><i class="fas fa-user"></i> Logout</a>
         </div>
         
         <div class="mobile-menu">
             <i class="fas fa-bars"></i>
         </div>
     </nav>
+
+    <div class="container">
         <h1>Employment Verification</h1>
         <p>Submit your documents and profile to become a verified service provider.</p>
-      <form id="verificationForm">
-      <div class="form-section">
-      <h2>Personal Information</h2>
-     <label>Full Name:</label>
-      <input type="text" name="fullname" required><br>
-      <label>Phone Number:</label>
-      <input type="tel" name="phone"required><br>
-      <label>Email Address:</label>
-      <input type="email" name="email"required><br>
-      <label>Address/City:</label>
-      <input type="text" name="address"required><br>
-    </div>
-      <div class="form-section">
-      <h2>Professional Information</h2>
-      <label>Service Category:</label>
-      <select name="service">
-        <option value="">Select your service</option>
-        <option>Electrician</option>
-        <option>Plumber</option>
-        <option>Mechanic</option>
-      </select><br>
-      <label>Years of Experience:</label>
-      <select name="experience">
-        <option>0-1</option>
-        <option>2-4</option>
-        <option>5+</option>
-      </select><br>
-      <label>Upload ID Proof:</label>
-      <input type="file"><br>
-      <label>Upload Certification:</label>
-      <input type="file"><br>
-      <label>Upload Profile Photo:</label>
-      <input type="file"><br>
-    </div>
-    <div class="confirmation-checkbox">
-  <label>
-    <input type="checkbox" required>
-    I confirm the information is correct.
-  </label>
-</div>
 
-<button type="submit">Submit for Verification</button>
-  </form>
-   <footer>
-        <a>&copy; 2025 HelpDesk Management System. All rights reserved.</a>
+        <form id="verificationForm" action="submit_verification.php" method="POST" enctype="multipart/form-data">
+            <div class="form-section">
+                <h2>Personal Information</h2>
+
+                <label for="fullname">Full Name:</label>
+                <input type="text" name="fullname" id="fullname" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" name="phone" id="phone" required>
+
+                <label for="email">Email Address:</label>
+                <input type="email" name="email" id="email" required>
+
+                <label for="address">Address/City:</label>
+                <input type="text" name="address" id="address" required>
+            </div>
+
+            <div class="form-section">
+                <h2>Professional Information</h2>
+
+                <label for="service">Service Category:</label>
+                <select name="service" id="service" required>
+                    <option value="">Select your service</option>
+                    <option value="Electrician">Electrician</option>
+                    <option value="Plumber">Plumber</option>
+                    <option value="Mechanic">Mechanic</option>
+                </select>
+
+                <label for="experience">Years of Experience:</label>
+                <select name="experience" id="experience" required>
+                    <option value="0-1">0-1</option>
+                    <option value="2-4">2-4</option>
+                    <option value="5+">5+</option>
+                </select>
+
+                <label for="idProof">Upload ID Proof:</label>
+                <input type="file" name="id_proof" id="idProof" required>
+
+                <label for="certification">Upload Certification:</label>
+                <input type="file" name="certification" id="certification" required>
+
+                <label for="profilePhoto">Upload Profile Photo:</label>
+                <input type="file" name="profile_photo" id="profilePhoto" required>
+            </div>
+
+            <div class="confirmation-checkbox">
+                <input type="checkbox" name="confirm" id="confirm" required>
+                <label for="confirm">I confirm the information is correct.</label>
+            </div>
+
+            <button type="submit">Submit for Verification</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 HelpDesk Management System. All rights reserved.</p>
     </footer>
-<script>
-    document.getElementById("verificationForm")("submit", function(event) {
-      event.preventDefault(); 
-      alert("Form submitted successfully!");
-    });
-  </script>
-  </body> 
-  </html>
-
+</body>
+</html>

@@ -12,6 +12,31 @@
     .home:hover{
       color:  rgba(4, 208, 157, 0.833);
     }
+     .logo {
+            display: flex;
+            align-items: center;
+        margin-right:40% ;
+        }
+
+        .logo i {
+            color: rgb(241, 241, 241);
+            font-size: 2rem;
+            margin-right: 12px;
+            
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color:  rgba(4, 208, 157, 0.833);
+            letter-spacing: -0.5px;
+            
+        }
+
+        .logo-text span {
+            color:white;
+        }
+
 
     body {
       min-height: 100vh;

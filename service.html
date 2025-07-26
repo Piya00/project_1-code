@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk - Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .navbar {
+            background: #2c3e50;
+            box-shadow: 0px 1px rgba(255, 255, 255, 0.573);
+            padding: 0 5%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: white;
+            font-size: 2rem;
+            margin-right: 12px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: rgba(4, 208, 157, 0.833);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a i {
+            margin-right: 8px;
+            font-size: 0.9em;
+        }
+
+        .nav-links a:hover {
+            color: rgba(4, 208, 157, 0.833);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: rgba(4, 208, 157, 0.833);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 6px;
+            font-size: 0.8em;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 220px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f1f1;
+            color: #2c3e50;
+        }
+
+        .dropdown-content a i {
+            color: rgba(4, 208, 157, 0.833);
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .cta-button {
+            background-color: rgba(4, 208, 157, 0.833);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+            margin-left: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(31, 134, 198, 0.941);
+            background-color: rgba(13, 164, 164, 0.751);
+            color: white;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .service-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .service-description {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .service-price {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .filter-container {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        /* Worker profile styles */
+        .worker-profile {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .worker-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .worker-info {
+            flex: 1;
+        }
+
+        .worker-name {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .worker-specialty {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .worker-rating {
+            color: #f39c12;
+            margin-bottom: 0.5rem;
+        }
+
+        .worker-distance {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .worker-contact {
+            margin-top: 0.5rem;
+        }
+
+        .worker-contact a {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        /* Service badges */
+        .service-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge-emergency {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .badge-certified {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .badge-24-7 {
+            background-color: #3498db;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .worker-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-hands-helping"></i>
+            <div class="logo-text">Help<span>Desk</span></div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="demo.html"><i class="fas fa-home"></i> Home</a>
+            
+            <div class="dropdown">
+                <a href="service_2.html"><i class="fas fa-concierge-bell"></i> Services</a>
+                <div class="dropdown-content">
+                    <a href="#plumbing"><i class="fas fa-wrench"></i> Plumbing</a>
+                    <a href="#electrical"><i class="fas fa-bolt"></i> Electrical</a>
+                    <a href="#mechanical"><i class="fas fa-cogs"></i> Mechanical</a>
+                </div>
+            </div>
+            
+            <a href="employeeverificationpage.html"><i class="fas fa-briefcase"></i> Employment</a>
+            <a href="proj.html"> <i class="fas fa-user"> Logout</i></a>
+        </div>
+        
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Our Services</h1>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Services</button>
+            <button class="filter-btn" data-filter="plumbing">Plumbing</button>
+            <button class="filter-btn" data-filter="electrical">Electrical</button>
+            <button class="filter-btn" data-filter="mechanical">Mechanical</button>
+        </div>
+
+        <div class="services-grid" id="services-container">
+            <!-- Plumbing Services -->
+            <div class="service-card" data-category="plumbing">
+                <img src="Emergency Plumbing Repair.jpg" alt="Emergency Plumbing" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Emergency Plumbing Repair</h3>
+                    <span class="service-badge badge-emergency">Emergency</span>
+                    <span class="service-badge badge-24-7">24/7</span>
+                    <p class="service-description">24/7 urgent plumbing fixes for leaks and bursts</p>
+                    <p class="service-price">Rs. 2000 - Rs. 8000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="plumbing">
+                <img src="Pipe Installation.jpg" alt="Pipe Installation" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Pipe Installation & Repair</h3>
+                    <span class="service-badge badge-certified">Certified</span>
+                    <p class="service-description">Professional pipe fitting and maintenance</p>
+                    <p class="service-price">Rs. 1500 - Rs. 10000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="plumbing">
+                <img src="Water Heater Services.jpg" alt="Water Heater" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Water Heater Services</h3>
+                    <span class="service-badge badge-certified">Certified</span>
+                    <p class="service-description">Installation, repair, and maintenance of all water heaters</p>
+                    <p class="service-price">Rs. 2500 - Rs. 12000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="plumbing">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Drain Cleaning" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Drain Cleaning</h3>
+                    <p class="service-description">Clog removal and drain maintenance</p>
+                    <p class="service-price">Rs. 1000 - Rs. 5000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="plumbing">
+                <img src="Bathroom Fixture Installation.jpg" alt="Bathroom Fixtures" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Bathroom Fixture Installation</h3>
+                    <p class="service-description">Sinks, showers, toilets, and faucets</p>
+                    <p class="service-price">Rs. 2000 - Rs. 15000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <!-- Electrical Services -->
+            <div class="service-card" data-category="electrical">
+                <img src="Electrical Wiring.jpg" alt="Electrical Wiring" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Electrical Wiring</h3>
+                    <span class="service-badge badge-certified">Certified</span>
+                    <p class="service-description">Complete home/office wiring solutions</p>
+                    <p class="service-price">Rs. 3000 - Rs. 25000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="electrical">
+                <img src="Circuit Breaker Repair.jpg" alt="Circuit Breaker" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Circuit Breaker Repair</h3>
+                    <span class="service-badge badge-emergency">Emergency</span>
+                    <p class="service-description">Troubleshooting and panel upgrades</p>
+                    <p class="service-price">Rs. 2000 - Rs. 15000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="electrical">
+                <img src="Light Fixture Installation.jpg" alt="Light Fixtures" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Light Fixture Installation</h3>
+                    <p class="service-description">All types of lighting installations</p>
+                    <p class="service-price">Rs. 1000 - Rs. 8000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="electrical">
+                <img src="OutletSwitch Repair.jpg" alt="Outlet Repair" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Outlet/Switch Repair</h3>
+                    <p class="service-description">Faulty outlet and switch replacement</p>
+                    <p class="service-price">Rs. 500 - Rs. 3000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="electrical">
+                <img src="Generator Installation.jpg" alt="Generator" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Generator Installation</h3>
+                    <span class="service-badge badge-certified">Certified</span>
+                    <p class="service-description">Home backup power solutions</p>
+                    <p class="service-price">Rs. 10000 - Rs. 50000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <!-- Mechanical Services -->
+            <div class="service-card" data-category="mechanical">
+                <img src="AC Repair & Maintenance.jpg" alt="AC Repair" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">AC Repair & Maintenance</h3>
+                    <span class="service-badge badge-certified">Certified</span>
+                    <p class="service-description">Cooling system servicing</p>
+                    <p class="service-price">Rs. 2500 - Rs. 15000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="mechanical">
+                <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Refrigerator" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Refrigerator Repair</h3>
+                    <p class="service-description">Domestic and commercial fridge maintenance</p>
+                    <p class="service-price">Rs. 2000 - Rs. 10000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="mechanical">
+                <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Washing Machine" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Washing Machine Service</h3>
+                    <p class="service-description">Repair and installation</p>
+                    <p class="service-price">Rs. 1500 - Rs. 8000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="mechanical">
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Kitchen Appliances" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Kitchen Appliance Repair</h3>
+                    <p class="service-description">Oven, microwave, etc.</p>
+                    <p class="service-price">Rs. 1000 - Rs. 6000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="mechanical">
+                <img src="Elevator Maintenance.jpg" alt="Elevator" class="service-img">
+                <div class="service-content">
+                    <h3 class="service-title">Elevator Maintenance</h3>
+                    <span class="service-badge badge-certified">Certified</span>
+                    <p class="service-description">Regular servicing and repairs</p>
+                    <p class="service-price">Rs. 5000 - Rs. 30000</p>
+                    <button class="btn btn-block request-btn">Request Service</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Service Modal -->
+    <div class="modal" id="request-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Request Service</h2>
+            <form id="service-request-form">
+                <div class="form-group">
+                    <label for="service-name">Service</label>
+                    <input type="text" id="service-name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="request-name">Your Name</label>
+                    <input type="text" id="request-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="request-phone">Phone Number</label>
+                    <input type="tel" id="request-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="request-address">Address</label>
+                    <select id="request-address" required>
+                        <option value="">Select your address</option>
+                        <option value="Thamel">Thamel, Kathmandu</option>
+                        <option value="Boudha">Boudha, Kathmandu</option>
+                        <option value="Patan">Patan, Lalitpur</option>
+                        <option value="Bhaktapur">Bhaktapur</option>
+                        <option value="New Road">New Road, Kathmandu</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="request-date">Preferred Date</label>
+                    <input type="date" id="request-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="request-time">Preferred Time</label>
+                    <select id="request-time" required>
+                        <option value="">Select a time</option>
+                        <option value="morning">Morning (9AM - 12PM)</option>
+                        <option value="afternoon">Afternoon (12PM - 4PM)</option>
+                        <option value="evening">Evening (4PM - 8PM)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="request-notes">Additional Notes</label>
+                    <textarea id="request-notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-request">Cancel</button>
+                    <button type="submit" class="btn">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Workers Modal -->
+    <div class="modal" id="workers-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Available Service Providers</h2>
+            <p>Here are the nearest service providers for your request:</p>
+            
+            <div id="workers-container">
+                <!-- Worker profiles will be inserted here -->
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn" id="close-workers">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 HelpDesk Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Worker data organized by service category and location
+          const workers = {
+    "plumbing": {
+        "Thamel": [
+            {
+                id: 1,
+                name: "Rajesh Thapa",
+                specialty: "Emergency Plumbing Specialist",
+                rating: "★★★★★ (4.9)",
+                distance: "0.5 km away",
+                experience: "8 years experience",
+                phone: "9841234567",
+                avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+            }
+        ],
+        "Boudha": [
+            {
+                id: 2,
+                name: "Hari Shrestha",
+                specialty: "Pipe Installation Expert",
+                rating: "★★★★☆ (4.6)",
+                distance: "1.2 km away",
+                experience: "5 years experience",
+                phone: "9841234568",
+                avatar: "https://randomuser.me/api/portraits/men/45.jpg"
+            }
+        ],
+        "Patan": [
+            {
+                id: 3,
+                name: "Sita Gurung",
+                specialty: "Water Heater Technician",
+                rating: "★★★★☆ (4.7)",
+                distance: "0.8 km away",
+                experience: "6 years experience",
+                phone: "9841234569",
+                avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+            }
+        ],
+        "Bhaktapur": [
+            {
+                id: 4,
+                name: "Gopal Maharjan",
+                specialty: "Traditional Plumbing Expert",
+                rating: "★★★★★ (4.8)",
+                distance: "1.0 km away",
+                experience: "7 years experience",
+                phone: "9841234570",
+                avatar: "https://randomuser.me/api/portraits/men/22.jpg"
+            }
+        ],
+        "New Road": [
+            {
+                id: 5,
+                name: "Mina Sharma",
+                specialty: "Drain Cleaning Specialist",
+                rating: "★★★★☆ (4.5)",
+                distance: "1.5 km away",
+                experience: "4 years experience",
+                phone: "9841234571",
+                avatar: "https://randomuser.me/api/portraits/women/33.jpg"
+            }
+        ]
+    },
+    "electrical": {
+        "Thamel": [
+            {
+                id: 6,
+                name: "Bikram Shrestha",
+                specialty: "Electrical Wiring Expert",
+                rating: "★★★★★ (4.8)",
+                distance: "0.3 km away",
+                experience: "7 years experience",
+                phone: "9841234572",
+                avatar: "https://randomuser.me/api/portraits/men/55.jpg"
+            }
+        ],
+        "Boudha": [
+            {
+                id: 7,
+                name: "Laxmi Rai",
+                specialty: "Circuit Breaker Specialist",
+                rating: "★★★★☆ (4.6)",
+                distance: "1.0 km away",
+                experience: "6 years experience",
+                phone: "9841234573",
+                avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+            }
+        ],
+        "Patan": [
+            {
+                id: 8,
+                name: "Suresh Basnet",
+                specialty: "Lighting Installation",
+                rating: "★★★★☆ (4.6)",
+                distance: "0.7 km away",
+                experience: "5 years experience",
+                phone: "9841234574",
+                avatar: "https://randomuser.me/api/portraits/men/44.jpg"
+            }
+        ],
+        "Bhaktapur": [
+            {
+                id: 9,
+                name: "Anil Prajapati",
+                specialty: "Traditional Wiring Expert",
+                rating: "★★★★☆ (4.7)",
+                distance: "0.5 km away",
+                experience: "9 years experience",
+                phone: "9841234575",
+                avatar: "https://randomuser.me/api/portraits/men/68.jpg"
+            }
+        ],
+        "New Road": [
+            {
+                id: 10,
+                name: "Sunita Maharjan",
+                specialty: "Generator Installation",
+                rating: "★★★★★ (4.9)",
+                distance: "1.2 km away",
+                experience: "7 years experience",
+                phone: "9841234576",
+                avatar: "https://randomuser.me/api/portraits/women/72.jpg"
+            }
+        ]
+    },
+    "mechanical": {
+        "Thamel": [
+            {
+                id: 11,
+                name: "Gopal Rai",
+                specialty: "AC Repair Technician",
+                rating: "★★★★★ (4.9)",
+                distance: "0.7 km away",
+                experience: "5 years experience",
+                phone: "9841234577",
+                avatar: "https://randomuser.me/api/portraits/men/66.jpg"
+            }
+        ],
+        "Boudha": [
+            {
+                id: 12,
+                name: "Bimala Tamang",
+                specialty: "Refrigerator Repair",
+                rating: "★★★★★ (5.0)",
+                distance: "0.5 km away",
+                experience: "10 years experience",
+                phone: "9841234578",
+                avatar: "https://randomuser.me/api/portraits/women/55.jpg"
+            }
+        ],
+        "Patan": [
+            {
+                id: 13,
+                name: "Ramesh Gurung",
+                specialty: "Washing Machine Expert",
+                rating: "★★★★☆ (4.7)",
+                distance: "1.0 km away",
+                experience: "6 years experience",
+                phone: "9841234579",
+                avatar: "https://randomuser.me/api/portraits/men/77.jpg"
+            }
+        ],
+        "Bhaktapur": [
+            {
+                id: 14,
+                name: "Sabina Shrestha",
+                specialty: "Kitchen Appliance Repair",
+                rating: "★★★★☆ (4.6)",
+                distance: "0.8 km away",
+                experience: "5 years experience",
+                phone: "9841234580",
+                avatar: "https://randomuser.me/api/portraits/women/88.jpg"
+            }
+        ],
+        "New Road": [
+            {
+                id: 15,
+                name: "Nabin Bajracharya",
+                specialty: "Elevator Technician",
+                rating: "★★★★★ (4.9)",
+                distance: "0.3 km away",
+                experience: "8 years experience",
+                phone: "9841234581",
+                avatar: "https://randomuser.me/api/portraits/men/99.jpg"
+            }
+        ]
+    }
+};
+
+            // DOM elements
+            const servicesContainer = document.getElementById('services-container');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const requestModal = document.getElementById('request-modal');
+            const workersModal = document.getElementById('workers-modal');
+            const serviceRequestForm = document.getElementById('service-request-form');
+            const cancelRequestBtn = document.getElementById('cancel-request');
+            const closeWorkersBtn = document.getElementById('close-workers');
+            const serviceNameInput = document.getElementById('service-name');
+            const workersContainer = document.getElementById('workers-container');
+
+            // Current service being requested
+            let currentService = null;
+
+            // Filter functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.dataset.filter;
+                    const serviceCards = document.querySelectorAll('.service-card');
+
+                    serviceCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add event listeners to request buttons
+            document.querySelectorAll('.request-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const serviceCard = this.closest('.service-card');
+                    currentService = {
+                        title: serviceCard.querySelector('.service-title').textContent,
+                        category: serviceCard.dataset.category
+                    };
+                    openRequestModal(currentService);
+                });
+            });
+
+            // Open request modal
+            function openRequestModal(service) {
+                serviceNameInput.value = service.title;
+                requestModal.style.display = 'flex';
+            }
+
+            // Close request modal
+            function closeRequestModal() {
+                requestModal.style.display = 'none';
+            }
+
+            // Open workers modal
+            function openWorkersModal(address) {
+                const serviceCategory = currentService.category;
+                const availableWorkers = workers[serviceCategory][address] || [];
+                workersContainer.innerHTML = '';
+                
+                if (availableWorkers.length === 0) {
+                    workersContainer.innerHTML = '<p>No service providers available in this area at the moment.</p>';
+                } else {
+                    availableWorkers.forEach(worker => {
+                        const workerCard = document.createElement('div');
+                        workerCard.className = 'worker-profile';
+                        workerCard.innerHTML = `
+                            <img src="${worker.avatar}" alt="${worker.name}" class="worker-avatar">
+                            <div class="worker-info">
+                                <h3 class="worker-name">${worker.name}</h3>
+                                <span class="worker-specialty">${worker.specialty}</span>
+                                <div class="worker-rating">${worker.rating}</div>
+                                <div class="worker-experience">${worker.experience}</div>
+                                <div class="worker-distance">${worker.distance}</div>
+                                <div class="worker-contact">
+                                    <a href="tel:${worker.phone}"><i class="fas fa-phone"></i> Call</a>
+                                    <a href="#"><i class="fas fa-comment"></i> Message</a>
+                                </div>
+                            </div>
+                        `;
+                        workersContainer.appendChild(workerCard);
+                    });
+                }
+                
+                workersModal.style.display = 'flex';
+            }
+
+            // Close workers modal
+            function closeWorkersModal() {
+                workersModal.style.display = 'none';
+            }
+
+            // Cancel request
+            cancelRequestBtn.addEventListener('click', closeRequestModal);
+
+            // Close workers
+            closeWorkersBtn.addEventListener('click', closeWorkersModal);
+
+            // Submit request form
+            serviceRequestForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('request-name').value;
+                const phone = document.getElementById('request-phone').value;
+                const address = document.getElementById('request-address').value;
+                const date = document.getElementById('request-date').value;
+                const time = document.getElementById('request-time').value;
+                const notes = document.getElementById('request-notes').value;
+                
+                // Validate form
+                if (!name || !phone || !address || !date || !time) {
+                    alert('Please fill all required fields');
+                    return;
+                }
+                
+                // In a real app, you would send this data to your backend
+                console.log("Service Request Submitted:", {
+                    service: currentService.title,
+                    category: currentService.category,
+                    customerName: name,
+                    phone: phone,
+                    address: address,
+                    preferredDate: date,
+                    preferredTime: time,
+                    notes: notes
+                });
+                
+                // Close request modal
+                closeRequestModal();
+                
+                // Show available workers for this service category and location
+                openWorkersModal(address);
+            });
+
+            // Close modal when clicking outside
+            requestModal.addEventListener('click', function(e) {
+                if (e.target === requestModal) {
+                    closeRequestModal();
+                }
+            });
+
+            workersModal.addEventListener('click', function(e) {
+                if (e.target === workersModal) {
+                    closeWorkersModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
