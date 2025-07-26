@@ -43,27 +43,30 @@
   </div>
 
   <script>
-   document.getElementById('loginForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form from submitting normally
-  
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  const errorMessage = document.getElementById('error-message');
-  
-  // Get stored credentials
-  const storedUsername = localStorage.getItem('helpdesk_username');
-  const storedPassword = localStorage.getItem('helpdesk_password');
-  
-  // Check credentials (either default or stored)
-  if ((username === 'helpdesk' && password === 'findhelp123') || 
-      (username === storedUsername && password === storedPassword)) {
-    // Redirect to home page
-    window.location.href = './demo.html';
-  } else {
-    // Show error message
-    errorMessage.style.display = 'block';
-  }
-});
-  </script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+    
+    // Get stored user data
+    const storedUser = JSON.parse(localStorage.getItem('helpdesk_user'));
+    const defaultUser = { username: 'helpdesk', password: 'findhelp123' };
+    
+    // Check credentials
+    if ((username === defaultUser.username && password === defaultUser.password) ||
+        (storedUser && username === storedUser.username && password === storedUser.password)) {
+      // Redirect to home page
+      window.location.href = './demo.html';
+    } else {
+      // Show error message
+      errorMessage.style.display = 'block';
+      setTimeout(() => {
+        errorMessage.style.display = 'none';
+      }, 3000);
+    }
+  });
+</script>
 </body>
 </html>
