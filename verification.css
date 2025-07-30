@@ -93,7 +93,7 @@ body {
 }
 
 .dropdown > a::after {
-    content: '\f078';
+    
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     margin-left: 6px;
